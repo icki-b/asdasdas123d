@@ -4,10 +4,12 @@ import Features from "@/components/Features";
 import ProductSection from "@/components/ProductSection";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import CountdownTimer from "@/components/CountdownTimer";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
+      <CountdownTimer />
       <Header />
       <Hero />
       <section id="features">
