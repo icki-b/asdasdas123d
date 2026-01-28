@@ -1,53 +1,31 @@
-import { Zap, Droplets, Wrench, Battery, Car, Lightbulb } from "lucide-react";
+import { features, featuresSection } from "@/config/product";
 
-const features = [
-  {
-    icon: Zap,
-    title: "Automatyczne Włączanie",
-    description: "Światło zapala się automatycznie po otwarciu bagażnika i gaśnie po zamknięciu."
-  },
-  {
-    icon: Droplets,
-    title: "100% Wodoodporne",
-    description: "Klasa szczelności IP65 - odporne na deszcz, wilgoć i rozbryzgi wody."
-  },
-  {
-    icon: Wrench,
-    title: "Montaż w 5 Minut",
-    description: "Samoprzylepna taśma 3M - nie wymaga wiercenia ani specjalnych narzędzi."
-  },
-  {
-    icon: Battery,
-    title: "Bezprzewodowe",
-    description: "Wbudowana bateria - brak kabli i skomplikowanej instalacji."
-  },
-  {
-    icon: Car,
-    title: "Uniwersalne",
-    description: "Pasuje do każdego samochodu - osobowego, SUV, kombi i dostawczego."
-  },
-  {
-    icon: Lightbulb,
-    title: "Wysoka Jasność",
-    description: "Ultra jasne diody LED oświetlają cały bagażnik równomiernie."
-  }
-];
+/**
+ * Features Section - Template Component
+ * 
+ * SHOPIFY LIQUID CONVERSION:
+ * - featuresSection.title → {{ section.settings.title }}
+ * - featuresSection.description → {{ section.settings.description }}
+ * - features → {% for block in section.blocks where type == 'feature' %}
+ */
 
 const Features = () => {
   return (
     <section className="py-20 bg-card">
       <div className="container">
         {/* Section Header */}
+        {/* Shopify Liquid: {{ section.settings.title }}, {{ section.settings.description }} */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Dlaczego Warto?
+            {featuresSection.title}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Nasze oświetlenie LED to połączenie praktyczności, jakości i nowoczesnego designu.
+            {featuresSection.description}
           </p>
         </div>
 
         {/* Features Grid */}
+        {/* Shopify Liquid: {% for block in section.blocks where type == 'feature' %} */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <div 
@@ -56,17 +34,21 @@ const Features = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                {/* Shopify Liquid: {% render 'icon', icon: block.settings.icon %} */}
                 <feature.icon className="w-6 h-6 text-primary" />
               </div>
+              {/* Shopify Liquid: {{ block.settings.title }} */}
               <h3 className="text-lg font-semibold text-foreground mb-2">
                 {feature.title}
               </h3>
+              {/* Shopify Liquid: {{ block.settings.description }} */}
               <p className="text-muted-foreground text-sm">
                 {feature.description}
               </p>
             </div>
           ))}
         </div>
+        {/* Shopify Liquid: {% endfor %} */}
       </div>
     </section>
   );
