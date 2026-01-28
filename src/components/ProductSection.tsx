@@ -163,7 +163,7 @@ const ProductSection = () => {
 
             {/* Add to Cart */}
             {/* Shopify Liquid: <button type="submit" name="add" ...> */}
-            <Button variant="hero" size="xl" className="w-full mb-6">
+            <Button variant="brand" size="xl" className="w-full mb-6">
               <ShoppingCart className="w-5 h-5" />
               {ctaButtons.product}
             </Button>
