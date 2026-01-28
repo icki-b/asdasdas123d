@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Check, Truck, RotateCcw, Shield } from "lucide-react";
+import { ShoppingCart, Check, Truck, RotateCcw, Shield, Info } from "lucide-react";
 import productImage from "@/assets/led-strip-product.jpg";
 
+// Shopify Liquid mapping:
+// variant.price → {{ variant.price | money }}
+// variant.compareAtPrice → {{ variant.compare_at_price | money }}
+// variant.lowestPrice30Days → {{ product.metafields.custom.lowest_price_30d | money }}
+
 const variants = [
-  { id: "2m-white", name: "2M Biały", length: "2 metry", color: "Zimny biały", price: 49.99 },
-  { id: "2m-warm", name: "2M Ciepły", length: "2 metry", color: "Ciepły biały", price: 49.99 },
-  { id: "4m-white", name: "4M Biały", length: "4 metry", color: "Zimny biały", price: 69.99 },
-  { id: "4m-warm", name: "4M Ciepły", length: "4 metry", color: "Ciepły biały", price: 69.99 },
+  { id: "2m-white", name: "2M Biały", length: "2 metry", color: "Zimny biały", price: 49.99, compareAtPrice: 89.99, lowestPrice30Days: 45.99 },
+  { id: "2m-warm", name: "2M Ciepły", length: "2 metry", color: "Ciepły biały", price: 49.99, compareAtPrice: 89.99, lowestPrice30Days: 45.99 },
+  { id: "4m-white", name: "4M Biały", length: "4 metry", color: "Zimny biały", price: 69.99, compareAtPrice: 125.99, lowestPrice30Days: 65.99 },
+  { id: "4m-warm", name: "4M Ciepły", length: "4 metry", color: "Ciepły biały", price: 69.99, compareAtPrice: 125.99, lowestPrice30Days: 65.99 },
 ];
 
 const ProductSection = () => {
@@ -101,15 +106,32 @@ const ProductSection = () => {
             {/* Price */}
             <div className="mb-6 p-4 rounded-xl bg-card border border-border">
               <div className="flex items-baseline gap-3 mb-2">
+                {/* Shopify Liquid: {{ variant.price | money }} */}
                 <span className="text-3xl font-extrabold text-foreground">
                   {(selectedVariant.price * quantity).toFixed(2)} zł
                 </span>
+                {/* Shopify Liquid: {{ variant.compare_at_price | money }} */}
                 <span className="text-lg text-muted-foreground line-through">
-                  {(selectedVariant.price * 1.8 * quantity).toFixed(2)} zł
+                  {(selectedVariant.compareAtPrice * quantity).toFixed(2)} zł
                 </span>
               </div>
+              
+              {/* Omnibus Directive - Lowest price from last 30 days */}
+              {/* Shopify Liquid: {% if product.metafields.custom.lowest_price_30d %} */}
+              <div className="flex items-center gap-2 py-2 px-3 mb-2 rounded-lg bg-muted/50 border border-border/50">
+                <Info className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <p className="text-xs text-muted-foreground">
+                  Najniższa cena z ostatnich 30 dni:{" "}
+                  {/* Shopify Liquid: {{ product.metafields.custom.lowest_price_30d | money }} */}
+                  <span className="font-medium text-foreground">
+                    {(selectedVariant.lowestPrice30Days * quantity).toFixed(2)} zł
+                  </span>
+                </p>
+              </div>
+              {/* Shopify Liquid: {% endif %} */}
+              
               <p className="text-sm text-primary font-medium">
-                Oszczędzasz {((selectedVariant.price * 0.8) * quantity).toFixed(2)} zł
+                Oszczędzasz {((selectedVariant.compareAtPrice - selectedVariant.price) * quantity).toFixed(2)} zł
               </p>
             </div>
 
