@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Info, Zap } from "lucide-react";
-import heroImage from "@/assets/hero-trunk-led.jpg";
+import HeroBackground from "./HeroBackground";
 import { 
   productConfig, 
   defaultVariant, 
@@ -17,7 +17,7 @@ import {
  * - defaultVariant.price → {{ product.selected_or_first_available_variant.price | money }}
  * - defaultVariant.compareAtPrice → {{ product.selected_or_first_available_variant.compare_at_price | money }}
  * - defaultVariant.lowestPrice30Days → {{ product.metafields.custom.lowest_price_30d | money }}
- * - heroImage → {{ product.featured_image | image_url }}
+ * - HeroBackground → Can be replaced with CSS animation or Lottie in Shopify
  */
 
 const Hero = () => {
@@ -31,24 +31,15 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-28 sm:pt-24">
-      {/* Background Image with Overlay */}
-      {/* Shopify Liquid: {{ product.featured_image | image_url | image_tag }} */}
-      <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt={productConfig.heroImageAlt}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
-      </div>
+      {/* Animated Background */}
+      <HeroBackground />
 
       {/* Content */}
       <div className="container relative z-10 py-20">
         <div className="max-w-2xl animate-fade-in">
           {/* Badge */}
           {/* Shopify Liquid: {% if product.metafields.custom.badge %} */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6 backdrop-blur-sm">
             <Zap className="w-4 h-4 text-primary" />
             {/* Shopify Liquid: {{ product.metafields.custom.badge }} */}
             <span className="text-sm font-medium text-primary">{productConfig.badge}</span>
@@ -73,7 +64,7 @@ const Hero = () => {
           {/* Shopify Liquid: {% for block in section.blocks where type == 'feature_pill' %} */}
           <div className="flex flex-wrap gap-3 mb-8">
             {featurePills.map((pill, index) => (
-              <div key={index} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border">
+              <div key={index} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card/80 border border-border backdrop-blur-sm">
                 <pill.icon className="w-4 h-4 text-primary" />
                 <span className="text-sm text-foreground">{pill.label}</span>
               </div>
