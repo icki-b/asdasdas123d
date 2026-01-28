@@ -1,80 +1,158 @@
 
+## Plan: Przebudowa szablonu na styl Shrine (jasny motyw produktowy)
 
-## Plan: Dodanie informacji o najniższej cenie (Omnibus) z przygotowaniem pod Shopify Liquid
+### Analiza różnic
 
-### Cel
-Dodanie wyświetlania najniższej ceny z ostatnich 30 dni zgodnie z **Dyrektywą Omnibus UE**, z kodem przygotowanym do łatwej konwersji na szablon Shopify Liquid.
+**Obecny styl:**
+- Ciemny motyw z neonowymi akcentami (niebieski)
+- Animowane kule w tle (abstrakcyjne)
+- Tekst po lewej, animacja po prawej
 
-### Co zostanie dodane
+**Shrine Demo (docelowy styl):**
+- Jasny header + żywy kolorowy Hero (czerwono-pomarańczowy gradient)
+- Zdjęcie produktu po lewej, tekst po prawej
+- Wyraźna kolorystyka marki (jeden dominujący kolor)
+- Sekcja "As seen on" z logami mediów
+- Przewijany pasek z hasłami (marquee)
+- Tabela porównawcza "Us vs Others"
+- Karuzela opinii ekspertów
+- Sekcja z ikonami benefitów
 
-**1. Sekcja ProductSection - rozszerzenie bloku cenowego**
-- Aktualna cena promocyjna (duża, wyróżniona)
-- Przekreślona cena regularna
-- **Nowa linijka**: "Najniższa cena z ostatnich 30 dni: XX,XX zł"
-- Informacja o oszczędnościach
+---
 
-**2. Sekcja Hero - pod ceną**
-- Dodanie informacji o najniższej cenie w mniejszym formacie
+### Zakres zmian
 
-### Struktura danych (przygotowana pod Liquid)
+**1. Nowa paleta kolorów (konfigurowalna)**
 
-Kod będzie używał zmiennych z komentarzami wskazującymi odpowiedniki Liquid:
-
-```text
-React (placeholder)          →  Shopify Liquid
-─────────────────────────────────────────────────
-variant.price                →  {{ variant.price | money }}
-variant.compare_at_price     →  {{ variant.compare_at_price | money }}
-variant.lowestPrice30Days    →  {{ product.metafields.custom.lowest_price_30d | money }}
+Dodanie nowej zmiennej koloru marki w `product.ts`:
+```typescript
+export const themeConfig = {
+  brandColor: "15 100% 55%", // pomarańczowo-czerwony HSL
+  brandColorLight: "15 100% 65%",
+  heroGradient: "from-brand to-brand-light",
+  mode: "light", // lub "dark"
+}
 ```
 
-### Wygląd
+**2. Hero - przebudowa layoutu**
 
-```text
-┌─────────────────────────────────────────────┐
-│  49,99 zł          89,99 zł (przekreślona)  │
-│  ─────────────────────────────────────────  │
-│  ⓘ Najniższa cena z ostatnich 30 dni:       │
-│    45,99 zł                                 │
-│  ─────────────────────────────────────────  │
-│  Oszczędzasz 40 zł                          │
-└─────────────────────────────────────────────┘
+Zmiana z "tekst + abstrakcja" na "obraz produktu + tekst":
+- Lewa strona: zdjęcie produktu (pełna wysokość)
+- Prawa strona: tekst na kolorowym tle
+- Gradient jako tło zamiast animowanych kul
+- Usunięcie HeroBackground.tsx na rzecz prostego gradientu
+
+**3. Nowa sekcja: "As Seen On" (Social Proof)**
+
+Pasek z logami mediów/partnerów:
+```typescript
+// W product.ts
+export const socialProof = {
+  title: "Widziane w",
+  logos: ["/logos/auto-swiat.png", "/logos/moto.png", ...]
+}
 ```
+
+**4. Nowa sekcja: Marquee (przewijane hasła)**
+
+Automatycznie przewijany pasek z benefitami:
+- Utworzenie `MarqueeSection.tsx`
+- Hasła pobierane z konfiguracji
+
+**5. Nowa sekcja: Porównanie "My vs Konkurencja"**
+
+Tabela porównawcza pokazująca przewagi produktu:
+```typescript
+// W product.ts
+export const comparisonTable = {
+  title: "Niepokonane korzyści",
+  features: [
+    { name: "Bezprzewodowy", us: true, others: false },
+    { name: "Gwarancja 2 lata", us: true, others: false },
+    ...
+  ]
+}
+```
+
+**6. Nowa sekcja: Karuzela ekspertów/opinii**
+
+Karuzela zdjęć z opiniami:
+- Wykorzystanie istniejącego `embla-carousel-react`
+- Konfiguracja w `product.ts`
+
+**7. Aktualizacja Features na styl ikonowy**
+
+Zmiana z siatki kart na listę z ikonami i checkmarkami (jak w Shrine)
+
+---
 
 ### Szczegóły techniczne
 
-**Zmiany w `ProductSection.tsx`:**
-1. Dodanie pola `lowestPrice30Days` do każdego wariantu
-2. Rozszerzenie bloku cenowego o nową linijkę z ikoną informacji
-3. Komentarze Liquid przy każdej cenie dla łatwej konwersji
+**Nowe komponenty:**
+- `src/components/AsSeenOn.tsx` - sekcja z logami
+- `src/components/MarqueeSection.tsx` - przewijany pasek
+- `src/components/ComparisonTable.tsx` - tabela porównawcza
+- `src/components/TestimonialsCarousel.tsx` - karuzela opinii
+- `src/components/BenefitsWithIcons.tsx` - lista z ikonami
 
-**Zmiany w `Hero.tsx`:**
-1. Dodanie linijki z najniższą ceną pod główną ceną
+**Zmiany w istniejących:**
+- `src/index.css` - nowe zmienne kolorów, tryb jasny
+- `src/config/product.ts` - rozszerzenie o nowe sekcje
+- `src/components/Hero.tsx` - nowy layout z obrazem
+- `src/components/Features.tsx` - opcjonalna zmiana stylu
+- `src/pages/Index.tsx` - dodanie nowych sekcji
 
-**Styl informacji Omnibus:**
-- Mniejsza czcionka (text-xs)
-- Kolor: text-muted-foreground
-- Ikona informacji (Info icon z lucide-react)
-- Subtelne tło dla wyróżnienia
+**Usuwane:**
+- `src/components/HeroBackground.tsx` - zastąpione prostym gradientem
 
-### Komentarze Liquid w kodzie
+---
 
-Każde miejsce z ceną będzie miało komentarz pokazujący jak to zamienić:
+### Konfigurowalność motywu
 
-```javascript
-// Shopify Liquid: {{ variant.price | money }}
-{variant.price.toFixed(2)} zł
-
-// Shopify Liquid: {{ product.metafields.custom.lowest_price_30d | money }}
-{variant.lowestPrice30Days.toFixed(2)} zł
+Cały motyw będzie konfigurowalny z jednego miejsca:
+```typescript
+export const themeConfig = {
+  // Kolor marki (HSL bez nawiasów)
+  brandColor: "15 100% 55%",
+  
+  // Tryb kolorystyczny
+  mode: "light", // "light" | "dark"
+  
+  // Styl Hero
+  heroStyle: "image-left", // "image-left" | "image-right" | "centered"
+  
+  // Włączone sekcje
+  sections: {
+    asSeenOn: true,
+    marquee: true,
+    comparison: true,
+    testimonials: true,
+  }
+}
 ```
 
-### Wymagane metafield w Shopify
+---
 
-Po konwersji na Liquid, w Shopify trzeba będzie utworzyć metafield:
-- **Namespace**: `custom`
-- **Key**: `lowest_price_30d`
-- **Type**: `money`
+### Kolejność wdrożenia
 
-Shopify może automatycznie aktualizować to pole przez aplikację lub Flow.
+1. Dodanie themeConfig i nowych zmiennych CSS
+2. Przebudowa Hero na nowy layout
+3. Dodanie sekcji "As Seen On"
+4. Dodanie MarqueeSection
+5. Dodanie ComparisonTable
+6. Dodanie TestimonialsCarousel
+7. Integracja wszystkiego w Index.tsx
+8. Testy responsywności
 
+---
+
+### Przygotowanie pod Shopify Liquid
+
+Wszystkie nowe elementy będą miały komentarze wskazujące odpowiedniki Liquid:
+```javascript
+// Shopify Liquid: {% for block in section.blocks where type == 'logo' %}
+{socialProof.logos.map(...)}
+
+// Shopify Liquid: {{ section.settings.brand_color }}
+style={{ background: `hsl(${themeConfig.brandColor})` }}
+```
