@@ -2,70 +2,92 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Check, Truck, RotateCcw, Shield, Info } from "lucide-react";
 import productImage from "@/assets/led-strip-product.jpg";
+import { 
+  productConfig, 
+  productVariants, 
+  productBenefits,
+  ctaButtons 
+} from "@/config/product";
 
-// Shopify Liquid mapping:
-// variant.price → {{ variant.price | money }}
-// variant.compareAtPrice → {{ variant.compare_at_price | money }}
-// variant.lowestPrice30Days → {{ product.metafields.custom.lowest_price_30d | money }}
-
-const variants = [
-  { id: "2m-white", name: "2M Biały", length: "2 metry", color: "Zimny biały", price: 49.99, compareAtPrice: 89.99, lowestPrice30Days: 45.99 },
-  { id: "2m-warm", name: "2M Ciepły", length: "2 metry", color: "Ciepły biały", price: 49.99, compareAtPrice: 89.99, lowestPrice30Days: 45.99 },
-  { id: "4m-white", name: "4M Biały", length: "4 metry", color: "Zimny biały", price: 69.99, compareAtPrice: 125.99, lowestPrice30Days: 65.99 },
-  { id: "4m-warm", name: "4M Ciepły", length: "4 metry", color: "Ciepły biały", price: 69.99, compareAtPrice: 125.99, lowestPrice30Days: 65.99 },
-];
+/**
+ * Product Section - Template Component
+ * 
+ * SHOPIFY LIQUID CONVERSION:
+ * - productConfig.title → {{ product.title }}
+ * - productConfig.longDescription → {{ product.description }}
+ * - productVariants → {% for variant in product.variants %}
+ * - variant.price → {{ variant.price | money }}
+ * - variant.compareAtPrice → {{ variant.compare_at_price | money }}
+ * - variant.lowestPrice30Days → {{ product.metafields.custom.lowest_price_30d | money }}
+ * - productImage → {{ product.featured_image | image_url }}
+ */
 
 const ProductSection = () => {
-  const [selectedVariant, setSelectedVariant] = useState(variants[0]);
+  const [selectedVariant, setSelectedVariant] = useState(productVariants[0]);
   const [quantity, setQuantity] = useState(1);
+
+  // Calculate discount percentage
+  const discountPercent = Math.round(
+    ((selectedVariant.compareAtPrice - selectedVariant.price) / selectedVariant.compareAtPrice) * 100
+  );
 
   return (
     <section id="product" className="py-20 bg-background">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Product Image */}
+          {/* Shopify Liquid: {{ product.featured_image | image_url | image_tag }} */}
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden bg-card border border-border">
               <img 
                 src={productImage}
-                alt="LED Strip do bagażnika"
+                alt={productConfig.productImageAlt}
                 className="w-full aspect-square object-cover"
               />
               {/* Discount Badge */}
+              {/* Shopify Liquid: {% if product.compare_at_price > product.price %} */}
               <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-destructive text-destructive-foreground text-sm font-bold">
-                -44%
+                -{discountPercent}%
               </div>
+              {/* Shopify Liquid: {% endif %} */}
             </div>
             
             {/* Floating Features */}
             <div className="absolute -bottom-4 left-4 right-4 flex justify-center gap-4">
               <div className="px-4 py-2 rounded-full bg-card border border-border shadow-lg flex items-center gap-2">
                 <Truck className="w-4 h-4 text-primary" />
-                <span className="text-xs font-medium text-foreground">Darmowa wysyłka</span>
+                <span className="text-xs font-medium text-foreground">{productConfig.trustBadges.freeShipping}</span>
               </div>
             </div>
           </div>
 
           {/* Product Info */}
           <div>
+            {/* Badge */}
+            {/* Shopify Liquid: {% if product.metafields.custom.product_badge %} */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 mb-4">
               <span className="text-xs font-medium text-primary">Bestseller</span>
             </div>
+            {/* Shopify Liquid: {% endif %} */}
 
+            {/* Product Title */}
+            {/* Shopify Liquid: {{ product.title }} */}
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Oświetlenie LED do Bagażnika
+              {productConfig.title}
             </h2>
 
+            {/* Product Description */}
+            {/* Shopify Liquid: {{ product.description }} */}
             <p className="text-muted-foreground mb-6">
-              Automatyczne oświetlenie z czujnikiem ruchu. Zapala się gdy otwierasz bagażnik 
-              i gaśnie po zamknięciu. Wodoodporne, elastyczne i łatwe w montażu.
+              {productConfig.longDescription}
             </p>
 
             {/* Variants */}
+            {/* Shopify Liquid: {% for variant in product.variants %} */}
             <div className="mb-6">
               <h3 className="text-sm font-semibold text-foreground mb-3">Wybierz wariant:</h3>
               <div className="grid grid-cols-2 gap-3">
-                {variants.map((variant) => (
+                {productVariants.map((variant) => (
                   <button
                     key={variant.id}
                     onClick={() => setSelectedVariant(variant)}
@@ -75,13 +97,17 @@ const ProductSection = () => {
                         : "border-border hover:border-primary/50"
                     }`}
                   >
+                    {/* Shopify Liquid: {{ variant.title }} */}
                     <p className="font-semibold text-foreground">{variant.name}</p>
-                    <p className="text-xs text-muted-foreground">{variant.length} • {variant.color}</p>
+                    {/* Shopify Liquid: {{ variant.option1 }} • {{ variant.option2 }} */}
+                    <p className="text-xs text-muted-foreground">{variant.option1} • {variant.option2}</p>
+                    {/* Shopify Liquid: {{ variant.price | money }} */}
                     <p className="text-sm font-bold text-primary mt-1">{variant.price.toFixed(2)} zł</p>
                   </button>
                 ))}
               </div>
             </div>
+            {/* Shopify Liquid: {% endfor %} */}
 
             {/* Quantity */}
             <div className="mb-6">
@@ -103,7 +129,7 @@ const ProductSection = () => {
               </div>
             </div>
 
-            {/* Price */}
+            {/* Price Block */}
             <div className="mb-6 p-4 rounded-xl bg-card border border-border">
               <div className="flex items-baseline gap-3 mb-2">
                 {/* Shopify Liquid: {{ variant.price | money }} */}
@@ -136,41 +162,39 @@ const ProductSection = () => {
             </div>
 
             {/* Add to Cart */}
+            {/* Shopify Liquid: <button type="submit" name="add" ...> */}
             <Button variant="hero" size="xl" className="w-full mb-6">
               <ShoppingCart className="w-5 h-5" />
-              Dodaj do koszyka
+              {ctaButtons.product}
             </Button>
 
             {/* Trust Badges */}
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center p-3 rounded-lg bg-card border border-border">
                 <Truck className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-xs text-foreground font-medium">Darmowa wysyłka</p>
+                <p className="text-xs text-foreground font-medium">{productConfig.trustBadges.freeShipping}</p>
               </div>
               <div className="text-center p-3 rounded-lg bg-card border border-border">
                 <RotateCcw className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-xs text-foreground font-medium">30 dni zwrotu</p>
+                <p className="text-xs text-foreground font-medium">{productConfig.trustBadges.returnPolicy}</p>
               </div>
               <div className="text-center p-3 rounded-lg bg-card border border-border">
                 <Shield className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-xs text-foreground font-medium">2 lata gwarancji</p>
+                <p className="text-xs text-foreground font-medium">{productConfig.trustBadges.warranty}</p>
               </div>
             </div>
 
             {/* Benefits List */}
+            {/* Shopify Liquid: {% for block in section.blocks where type == 'benefit' %} */}
             <div className="mt-6 space-y-2">
-              {[
-                "Automatyczne włączanie/wyłączanie",
-                "Wodoodporna konstrukcja IP65",
-                "Montaż bez narzędzi w 5 minut",
-                "Pasuje do każdego samochodu"
-              ].map((benefit) => (
+              {productBenefits.map((benefit) => (
                 <div key={benefit} className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-primary" />
                   <span className="text-sm text-muted-foreground">{benefit}</span>
                 </div>
               ))}
             </div>
+            {/* Shopify Liquid: {% endfor %} */}
           </div>
         </div>
       </div>
