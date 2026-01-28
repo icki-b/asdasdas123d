@@ -29,7 +29,7 @@ const Header = () => {
           </nav>
 
           {/* CTA */}
-          <Button variant="neon" size="sm" onClick={scrollToProduct}>
+          <Button variant="brand" size="sm" onClick={scrollToProduct}>
             <ShoppingCart className="w-4 h-4" />
             <span className="hidden sm:inline">Kup teraz</span>
           </Button>

@@ -34,9 +34,9 @@ const CountdownTimer = () => {
   const formatTime = (num: number) => num.toString().padStart(2, '0');
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-destructive/90 to-destructive py-3 px-4 overflow-hidden">
+    <div className="fixed top-0 left-0 right-0 z-[60] bg-primary py-3 px-4 overflow-hidden">
       <div className="container">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-destructive-foreground">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-primary-foreground">
           {/* Flash Sale Label */}
           <div className="flex items-center gap-2 animate-pulse">
             <Flame className="w-5 h-5" />
