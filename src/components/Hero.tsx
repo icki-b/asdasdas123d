@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Zap, Shield, Droplets } from "lucide-react";
+import { ShoppingCart, Zap, Shield, Droplets, Info } from "lucide-react";
 import heroImage from "@/assets/hero-trunk-led.jpg";
 
 const Hero = () => {
@@ -59,13 +59,33 @@ const Hero = () => {
           </div>
 
           {/* Price & CTA */}
+          {/* Shopify Liquid mapping:
+              variant.price → {{ variant.price | money }}
+              variant.compare_at_price → {{ variant.compare_at_price | money }}
+              lowest_price_30d → {{ product.metafields.custom.lowest_price_30d | money }}
+          */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div>
               <div className="flex items-baseline gap-2">
+                {/* Shopify Liquid: {{ variant.price | money }} */}
                 <span className="text-4xl md:text-5xl font-extrabold text-foreground">49,99 zł</span>
+                {/* Shopify Liquid: {{ variant.compare_at_price | money }} */}
                 <span className="text-lg text-muted-foreground line-through">89,99 zł</span>
               </div>
-              <p className="text-sm text-primary font-medium mt-1">Oszczędzasz 40 zł (-44%)</p>
+              
+              {/* Omnibus Directive - Lowest price from last 30 days */}
+              {/* Shopify Liquid: {% if product.metafields.custom.lowest_price_30d %} */}
+              <div className="flex items-center gap-1.5 mt-1 mb-1">
+                <Info className="w-3 h-3 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground">
+                  Najniższa cena z 30 dni:{" "}
+                  {/* Shopify Liquid: {{ product.metafields.custom.lowest_price_30d | money }} */}
+                  <span className="font-medium">45,99 zł</span>
+                </span>
+              </div>
+              {/* Shopify Liquid: {% endif %} */}
+              
+              <p className="text-sm text-primary font-medium">Oszczędzasz 40 zł (-44%)</p>
             </div>
             
             <Button 
