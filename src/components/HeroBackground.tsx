@@ -1,8 +1,15 @@
+import { useEffect, useState } from "react";
+
 /**
- * Animated Hero Background - Fluid Neon Effect
+ * Animated Hero Background - Fluid Neon Effect with Parallax
  * 
  * Creates a dynamic, flowing background with neon glow effects
  * matching the dark premium automotive theme.
+ * 
+ * Features:
+ * - Reduced animation intensity for better performance
+ * - Parallax effect on scroll
+ * - Respects prefers-reduced-motion
  * 
  * SHOPIFY LIQUID NOTE:
  * For Shopify, this can be replaced with:
@@ -12,89 +19,131 @@
  */
 
 const HeroBackground = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Parallax multipliers
+  const parallaxSlow = scrollY * 0.1;
+  const parallaxMedium = scrollY * 0.2;
+  const parallaxFast = scrollY * 0.3;
+
   return (
     <div className="absolute inset-0 overflow-hidden bg-background">
       {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-surface-dark to-background" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-[hsl(222_47%_8%)] to-background" />
       
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs with parallax */}
       <div className="absolute inset-0">
-        {/* Primary large orb */}
+        {/* Primary large orb - most visible */}
         <div 
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-float animate-morph"
+          className="absolute w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[100px] md:blur-[120px]"
           style={{
-            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
+            top: '10%',
+            right: '5%',
+            background: 'radial-gradient(circle, hsl(199 89% 48% / 0.5) 0%, hsl(199 89% 48% / 0.2) 40%, transparent 70%)',
+            transform: `translateY(${parallaxSlow}px)`,
+            animation: 'hero-float 12s ease-in-out infinite',
           }}
         />
         
         {/* Secondary orb */}
         <div 
-          className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] rounded-full opacity-20 blur-3xl animate-float-delayed animate-morph"
+          className="absolute w-[350px] h-[350px] md:w-[500px] md:h-[500px] rounded-full blur-[80px] md:blur-[100px]"
           style={{
-            background: 'radial-gradient(circle, hsl(var(--neon-blue-glow)) 0%, transparent 70%)',
+            bottom: '20%',
+            right: '25%',
+            background: 'radial-gradient(circle, hsl(220 89% 55% / 0.4) 0%, hsl(220 89% 55% / 0.15) 40%, transparent 70%)',
+            transform: `translateY(${parallaxMedium}px)`,
+            animation: 'hero-float 15s ease-in-out infinite',
+            animationDelay: '-3s',
+          }}
+        />
+        
+        {/* Accent orb - smaller, brighter */}
+        <div 
+          className="absolute w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full blur-[60px] md:blur-[80px]"
+          style={{
+            top: '40%',
+            right: '15%',
+            background: 'radial-gradient(circle, hsl(199 89% 58% / 0.6) 0%, hsl(199 89% 48% / 0.2) 50%, transparent 70%)',
+            transform: `translateY(${parallaxFast}px)`,
+            animation: 'hero-pulse 8s ease-in-out infinite',
             animationDelay: '-2s',
           }}
         />
         
-        {/* Accent orb */}
+        {/* Extra glow spot */}
         <div 
-          className="absolute top-1/2 right-1/6 w-[300px] h-[300px] rounded-full opacity-25 blur-2xl animate-pulse-glow"
+          className="absolute w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-full blur-[50px]"
           style={{
-            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 60%)',
-            animationDelay: '-4s',
-          }}
-        />
-        
-        {/* Small floating particles */}
-        <div 
-          className="absolute top-1/3 right-1/2 w-[150px] h-[150px] rounded-full opacity-40 blur-xl animate-float"
-          style={{
-            background: 'radial-gradient(circle, hsl(var(--neon-blue)) 0%, transparent 70%)',
-            animationDelay: '-1s',
-          }}
-        />
-        
-        <div 
-          className="absolute bottom-1/3 right-1/4 w-[100px] h-[100px] rounded-full opacity-30 blur-lg animate-float-delayed"
-          style={{
-            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
-            animationDelay: '-3s',
+            top: '25%',
+            right: '35%',
+            background: 'radial-gradient(circle, hsl(199 89% 65% / 0.5) 0%, transparent 60%)',
+            transform: `translateY(${parallaxMedium}px)`,
+            animation: 'hero-pulse 10s ease-in-out infinite',
+            animationDelay: '-5s',
           }}
         />
       </div>
       
       {/* Subtle grid pattern overlay */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: `
-            linear-gradient(hsl(var(--primary) / 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--primary) / 0.3) 1px, transparent 1px)
+            linear-gradient(hsl(199 89% 48% / 0.4) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(199 89% 48% / 0.4) 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px',
-        }}
-      />
-      
-      {/* Noise texture for depth */}
-      <div 
-        className="absolute inset-0 opacity-[0.02] mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px',
+          transform: `translateY(${parallaxSlow * 0.5}px)`,
         }}
       />
       
       {/* Gradient overlays for content readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/70" />
       
-      {/* Vignette effect */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, hsl(var(--background)) 100%)',
-          opacity: 0.4,
-        }}
-      />
+      {/* Bottom fade for seamless transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+
+      {/* Inline keyframes */}
+      <style>{`
+        @keyframes hero-float {
+          0%, 100% { 
+            transform: translateY(0px) scale(1); 
+            opacity: 1;
+          }
+          50% { 
+            transform: translateY(-30px) scale(1.02); 
+            opacity: 0.85;
+          }
+        }
+        
+        @keyframes hero-pulse {
+          0%, 100% { 
+            opacity: 0.6;
+            transform: scale(1);
+          }
+          50% { 
+            opacity: 1;
+            transform: scale(1.1);
+          }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .absolute[style*="animation"] {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
