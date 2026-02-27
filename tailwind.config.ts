@@ -22,11 +22,6 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        brand: {
-          DEFAULT: "hsl(var(--brand))",
-          light: "hsl(var(--brand-light))",
-          dark: "hsl(var(--brand-dark))",
-        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -54,6 +49,13 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        neon: {
+          DEFAULT: "hsl(var(--neon-blue))",
+          glow: "hsl(var(--neon-blue-glow))",
+        },
+        surface: {
+          dark: "hsl(var(--dark-surface))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -96,10 +98,6 @@ export default {
           "0%": { opacity: "0", transform: "translateX(50px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
         },
-        "marquee": {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -108,7 +106,6 @@ export default {
         "scale-in": "scale-in 0.5s ease-out forwards",
         "slide-in-left": "slide-in-left 0.6s ease-out forwards",
         "slide-in-right": "slide-in-right 0.6s ease-out forwards",
-        "marquee": "marquee 30s linear infinite",
       },
     },
   },
