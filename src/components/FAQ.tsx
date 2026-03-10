@@ -7,28 +7,32 @@ import {
 
 const faqs = [
   {
-    question: "Czy pasuje do każdego samochodu?",
-    answer: "Tak! Nasze oświetlenie LED jest uniwersalne i pasuje do każdego typu samochodu - osobowego, SUV, kombi, czy dostawczego. Elastyczna taśma dopasowuje się do każdego kształtu bagażnika."
+    question: "Czy lampka pasuje do każdego roweru?",
+    answer: "Tak! Uchwyt jest uniwersalny i pasuje do kierownic o średnicy 22-35mm. Działa z rowerami MTB, szosowymi, crossowymi, miejskimi i elektrycznymi."
   },
   {
-    question: "Jak działa automatyczne włączanie?",
-    answer: "Oświetlenie posiada wbudowany czujnik ruchu/wibracji. Gdy otwierasz bagażnik, światło automatycznie się zapala. Po zamknięciu gaśnie po kilku sekundach, oszczędzając baterię."
+    question: "Jak jasna jest lampka? Czy 1000 lumenów to dużo?",
+    answer: "1000 lumenów to bardzo mocne światło - oświetla drogę na dystansie do 200 metrów. Dla porównania, typowa lampka miejska ma 200-400lm. Nasza lampka sprawdzi się nawet na nieoświetlonych leśnych trasach."
   },
   {
-    question: "Czy wymaga podłączenia do instalacji elektrycznej?",
-    answer: "Nie! To całkowicie bezprzewodowe rozwiązanie. Zasilane jest wbudowaną baterią, którą można ładować przez USB. Jedno ładowanie wystarcza na wiele miesięcy użytkowania."
+    question: "Jak długo działa na jednym ładowaniu?",
+    answer: "W trybie oszczędnym do 12 godzin, w trybie średnim ok. 5-6 godzin, a na pełnej mocy ok. 2-3 godziny. Wersja 5000mAh działa odpowiednio dłużej."
   },
   {
-    question: "Czy jest wodoodporne?",
-    answer: "Tak, nasze oświetlenie posiada klasę szczelności IP65, co oznacza pełną odporność na kurz i rozbryzgi wody. Możesz je bezpiecznie używać nawet w deszczowe dni."
+    question: "Czy mogę ładować telefon podczas jazdy?",
+    answer: "Tak! Lampka posiada wyjście USB i działa jako powerbank. Możesz naładować telefon w trakcie jazdy, co jest szczególnie przydatne przy dłuższych trasach z nawigacją."
   },
   {
-    question: "Jak zamontować oświetlenie?",
-    answer: "Montaż jest banalnie prosty i zajmuje około 5 minut. Wystarczy oczyścić powierzchnię, odkleić folię ochronną z taśmy samoprzylepnej 3M i przykleić pasek LED w wybranym miejscu. Nie wymaga żadnych narzędzi ani wiercenia."
+    question: "Czy jest wodoodporna?",
+    answer: "Tak, lampka posiada klasę ochrony IPX5, co oznacza odporność na strugi wody z każdego kierunku. Możesz spokojnie jeździć w deszczu."
+  },
+  {
+    question: "Co daje pilot zdalnego sterowania?",
+    answer: "Pilot montowany na kierownicy pozwala zmieniać tryby świecenia bez zdejmowania rąk z kierownicy. Szczególnie wygodne podczas nocnych zjazdów i jazdy w grupie."
   },
   {
     question: "Jaki jest czas dostawy?",
-    answer: "Zamówienia wysyłamy w ciągu 24 godzin. Standardowa dostawa to 3-5 dni roboczych. Oferujemy również darmową wysyłkę przy każdym zamówieniu!"
+    answer: "Zamówienia wysyłamy w ciągu 24 godzin. Standardowa dostawa to 3-7 dni roboczych. Oferujemy darmową wysyłkę przy każdym zamówieniu!"
   },
   {
     question: "Co jeśli produkt mi nie odpowiada?",

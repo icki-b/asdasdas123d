@@ -65,7 +65,7 @@ const CountdownTimer = () => {
 
           {/* Discount */}
           <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-background/20 backdrop-blur-sm">
-            <span className="text-sm font-bold">-44% TANIEJ</span>
+            <span className="text-sm font-bold">-47% TANIEJ</span>
           </div>
         </div>
       </div>

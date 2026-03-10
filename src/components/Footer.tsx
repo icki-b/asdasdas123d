@@ -8,11 +8,11 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h3 className="text-xl font-bold text-foreground mb-4">
-              <span className="text-primary">LED</span>Trunk
+              <span className="text-primary">Bike</span>Beam
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Premium oświetlenie LED do Twojego samochodu. 
-              Jakość, design i funkcjonalność w jednym.
+              Profesjonalne oświetlenie rowerowe LED. 
+              Bezpieczeństwo i widoczność na każdej trasie.
             </p>
           </div>
 
@@ -22,7 +22,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>kontakt@ledtrunk.pl</span>
+                <span>kontakt@bikebeam.pl</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 text-primary" />
@@ -58,7 +58,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 LEDTrunk. Wszystkie prawa zastrzeżone.
+            © 2025 BikeBeam. Wszystkie prawa zastrzeżone.
           </p>
         </div>
       </div>
