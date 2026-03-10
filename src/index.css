@@ -6,81 +6,81 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    --background: 230 25% 7%;
+    --foreground: 45 20% 95%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 230 25% 10%;
+    --card-foreground: 45 20% 95%;
 
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 230 25% 10%;
+    --popover-foreground: 45 20% 95%;
 
-    --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 6%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 230 25% 7%;
 
-    --secondary: 222 47% 14%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 230 25% 15%;
+    --secondary-foreground: 45 20% 95%;
 
-    --muted: 222 47% 14%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 230 25% 15%;
+    --muted-foreground: 220 15% 60%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 6%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 230 25% 7%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 45 20% 95%;
 
-    --border: 222 47% 18%;
-    --input: 222 47% 18%;
-    --ring: 199 89% 48%;
+    --border: 230 20% 18%;
+    --input: 230 20% 18%;
+    --ring: 38 92% 50%;
 
     --radius: 0.75rem;
 
     /* Custom colors */
-    --neon-blue: 199 89% 48%;
-    --neon-blue-glow: 199 89% 60%;
-    --dark-surface: 222 47% 11%;
+    --neon-amber: 38 92% 50%;
+    --neon-amber-glow: 32 95% 60%;
+    --dark-surface: 230 25% 12%;
     
     /* Gradients */
-    --gradient-neon: linear-gradient(135deg, hsl(199 89% 48%), hsl(220 89% 60%));
-    --gradient-dark: linear-gradient(180deg, hsl(222 47% 6%), hsl(222 47% 9%));
-    --gradient-card: linear-gradient(135deg, hsl(222 47% 11%), hsl(222 47% 8%));
+    --gradient-neon: linear-gradient(135deg, hsl(38 92% 50%), hsl(25 95% 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(230 25% 7%), hsl(230 25% 10%));
+    --gradient-card: linear-gradient(135deg, hsl(230 25% 12%), hsl(230 25% 9%));
     
     /* Shadows */
-    --shadow-neon: 0 0 30px hsl(199 89% 48% / 0.3);
-    --shadow-neon-lg: 0 0 60px hsl(199 89% 48% / 0.4);
-    --shadow-card: 0 10px 40px hsl(222 47% 4% / 0.5);
+    --shadow-neon: 0 0 30px hsl(38 92% 50% / 0.3);
+    --shadow-neon-lg: 0 0 60px hsl(38 92% 50% / 0.4);
+    --shadow-card: 0 10px 40px hsl(230 25% 4% / 0.5);
 
-    --sidebar-background: 222 47% 6%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 199 89% 48%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 47% 14%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 47% 18%;
-    --sidebar-ring: 199 89% 48%;
+    --sidebar-background: 230 25% 7%;
+    --sidebar-foreground: 45 20% 95%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 230 25% 7%;
+    --sidebar-accent: 230 25% 15%;
+    --sidebar-accent-foreground: 45 20% 95%;
+    --sidebar-border: 230 20% 18%;
+    --sidebar-ring: 38 92% 50%;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 6%;
-    --secondary: 222 47% 14%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 222 47% 14%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 6%;
+    --background: 230 25% 7%;
+    --foreground: 45 20% 95%;
+    --card: 230 25% 10%;
+    --card-foreground: 45 20% 95%;
+    --popover: 230 25% 10%;
+    --popover-foreground: 45 20% 95%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 230 25% 7%;
+    --secondary: 230 25% 15%;
+    --secondary-foreground: 45 20% 95%;
+    --muted: 230 25% 15%;
+    --muted-foreground: 220 15% 60%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 230 25% 7%;
     --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 222 47% 18%;
-    --input: 222 47% 18%;
-    --ring: 199 89% 48%;
+    --destructive-foreground: 45 20% 95%;
+    --border: 230 20% 18%;
+    --input: 230 20% 18%;
+    --ring: 38 92% 50%;
   }
 }
 
@@ -105,7 +105,7 @@
   }
   
   .text-glow {
-    text-shadow: 0 0 20px hsl(199 89% 48% / 0.5);
+    text-shadow: 0 0 20px hsl(38 92% 50% / 0.5);
   }
   
   .bg-gradient-neon {
@@ -127,8 +127,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsl(199 89% 48% / 0.3); }
-  50% { box-shadow: 0 0 40px hsl(199 89% 48% / 0.6); }
+  0%, 100% { box-shadow: 0 0 20px hsl(38 92% 50% / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(38 92% 50% / 0.6); }
 }
 
 @keyframes shimmer {
@@ -145,7 +145,7 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, hsl(199 89% 48% / 0.2), transparent);
+  background: linear-gradient(90deg, transparent, hsl(38 92% 50% / 0.2), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }

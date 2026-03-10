@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Check, Truck, RotateCcw, Shield } from "lucide-react";
-import productImage from "@/assets/led-strip-product.jpg";
+import productImage from "@/assets/bike-light-product.jpg";
 
 const variants = [
-  { id: "2m-white", name: "2M Biały", length: "2 metry", color: "Zimny biały", price: 49.99 },
-  { id: "2m-warm", name: "2M Ciepły", length: "2 metry", color: "Ciepły biały", price: 49.99 },
-  { id: "4m-white", name: "4M Biały", length: "4 metry", color: "Zimny biały", price: 69.99 },
-  { id: "4m-warm", name: "4M Ciepły", length: "4 metry", color: "Ciepły biały", price: 69.99 },
+  { id: "4000-basic", name: "4000mAh Basic", battery: "4000mAh", remote: "Bez pilota", price: 79.99 },
+  { id: "4000-remote", name: "4000mAh + Pilot", battery: "4000mAh", remote: "Z pilotem", price: 99.99 },
+  { id: "5000-basic", name: "5000mAh Basic", battery: "5000mAh", remote: "Bez pilota", price: 99.99 },
+  { id: "5000-remote", name: "5000mAh + Pilot", battery: "5000mAh", remote: "Z pilotem", price: 119.99 },
 ];
 
 const ProductSection = () => {
@@ -23,12 +23,12 @@ const ProductSection = () => {
             <div className="relative rounded-2xl overflow-hidden bg-card border border-border">
               <img 
                 src={productImage}
-                alt="LED Strip do bagażnika"
+                alt="Lampka rowerowa LED 1000 lumenów"
                 className="w-full aspect-square object-cover"
               />
               {/* Discount Badge */}
               <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-destructive text-destructive-foreground text-sm font-bold">
-                -44%
+                -47%
               </div>
             </div>
             
@@ -48,12 +48,12 @@ const ProductSection = () => {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Oświetlenie LED do Bagażnika
+              Lampka Rowerowa LED 1000lm
             </h2>
 
             <p className="text-muted-foreground mb-6">
-              Automatyczne oświetlenie z czujnikiem ruchu. Zapala się gdy otwierasz bagażnik 
-              i gaśnie po zamknięciu. Wodoodporne, elastyczne i łatwe w montażu.
+              Profesjonalna lampka rowerowa z aluminium. 1000 lumenów, wodoodporna IPX5, 
+              funkcja powerbanku, ładowanie USB-C. Idealna na MTB i szosę.
             </p>
 
             {/* Variants */}
@@ -71,7 +71,7 @@ const ProductSection = () => {
                     }`}
                   >
                     <p className="font-semibold text-foreground">{variant.name}</p>
-                    <p className="text-xs text-muted-foreground">{variant.length} • {variant.color}</p>
+                    <p className="text-xs text-muted-foreground">{variant.battery} • {variant.remote}</p>
                     <p className="text-sm font-bold text-primary mt-1">{variant.price.toFixed(2)} zł</p>
                   </button>
                 ))}
@@ -105,11 +105,11 @@ const ProductSection = () => {
                   {(selectedVariant.price * quantity).toFixed(2)} zł
                 </span>
                 <span className="text-lg text-muted-foreground line-through">
-                  {(selectedVariant.price * 1.8 * quantity).toFixed(2)} zł
+                  {(selectedVariant.price * 1.88 * quantity).toFixed(2)} zł
                 </span>
               </div>
               <p className="text-sm text-primary font-medium">
-                Oszczędzasz {((selectedVariant.price * 0.8) * quantity).toFixed(2)} zł
+                Oszczędzasz {((selectedVariant.price * 0.88) * quantity).toFixed(2)} zł
               </p>
             </div>
 
@@ -131,17 +131,18 @@ const ProductSection = () => {
               </div>
               <div className="text-center p-3 rounded-lg bg-card border border-border">
                 <Shield className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-xs text-foreground font-medium">2 lata gwarancji</p>
+                <p className="text-xs text-foreground font-medium">Gwarancja jakości</p>
               </div>
             </div>
 
             {/* Benefits List */}
             <div className="mt-6 space-y-2">
               {[
-                "Automatyczne włączanie/wyłączanie",
-                "Wodoodporna konstrukcja IP65",
-                "Montaż bez narzędzi w 5 minut",
-                "Pasuje do każdego samochodu"
+                "Aluminiowa obudowa - lekka i wytrzymała (152g)",
+                "Wodoodporna konstrukcja IPX5",
+                "Funkcja powerbanku - naładuj telefon w trasie",
+                "6 trybów świecenia + stroboskop",
+                "Montaż na kierownicy bez narzędzi"
               ].map((benefit) => (
                 <div key={benefit} className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-primary" />

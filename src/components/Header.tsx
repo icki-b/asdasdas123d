@@ -12,7 +12,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="/" className="text-xl font-bold text-foreground">
-            <span className="text-primary">LED</span>Trunk
+            <span className="text-primary">Bike</span>Beam
           </a>
 
           {/* Navigation */}

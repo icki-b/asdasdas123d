@@ -1,35 +1,35 @@
-import { Zap, Droplets, Wrench, Battery, Car, Lightbulb } from "lucide-react";
+import { Zap, Droplets, Battery, Bike, Flashlight, Usb } from "lucide-react";
 
 const features = [
   {
     icon: Zap,
-    title: "Automatyczne Włączanie",
-    description: "Światło zapala się automatycznie po otwarciu bagażnika i gaśnie po zamknięciu."
+    title: "1000 Lumenów",
+    description: "Ultra jasny reflektor LED oświetla drogę nawet w kompletnej ciemności na dystansie do 200m."
   },
   {
     icon: Droplets,
-    title: "100% Wodoodporne",
-    description: "Klasa szczelności IP65 - odporne na deszcz, wilgoć i rozbryzgi wody."
-  },
-  {
-    icon: Wrench,
-    title: "Montaż w 5 Minut",
-    description: "Samoprzylepna taśma 3M - nie wymaga wiercenia ani specjalnych narzędzi."
+    title: "Wodoodporna IPX5",
+    description: "Odporna na deszcz i rozbryzgi wody. Jedź bez obaw w każdych warunkach pogodowych."
   },
   {
     icon: Battery,
-    title: "Bezprzewodowe",
-    description: "Wbudowana bateria - brak kabli i skomplikowanej instalacji."
+    title: "Power Bank",
+    description: "Wbudowany akumulator 5000mAh służy również jako powerbank do ładowania telefonu."
   },
   {
-    icon: Car,
-    title: "Uniwersalne",
-    description: "Pasuje do każdego samochodu - osobowego, SUV, kombi i dostawczego."
+    icon: Usb,
+    title: "Ładowanie USB-C",
+    description: "Szybkie ładowanie przez USB-C. Pełne naładowanie w zaledwie 2-3 godziny."
   },
   {
-    icon: Lightbulb,
-    title: "Wysoka Jasność",
-    description: "Ultra jasne diody LED oświetlają cały bagażnik równomiernie."
+    icon: Bike,
+    title: "Uniwersalny Montaż",
+    description: "Pasuje do każdego roweru - MTB, szosowego, crossowego i miejskiego. Montaż bez narzędzi."
+  },
+  {
+    icon: Flashlight,
+    title: "6 Trybów Świecenia",
+    description: "Od oszczędnego po ultra jasny. Tryb stroboskopowy zwiększa widoczność w ruchu miejskim."
   }
 ];
 
@@ -43,7 +43,7 @@ const Features = () => {
             Dlaczego Warto?
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Nasze oświetlenie LED to połączenie praktyczności, jakości i nowoczesnego designu.
+            Profesjonalna lampka rowerowa łącząca moc, wytrzymałość i funkcję powerbanku.
           </p>
         </div>
 
